@@ -15,7 +15,7 @@ class MapComponent extends Component {
         super(props);
         this.state = {
             map: null,
-            matches: window.matchMedia("(min-width: 1000px)").matches
+            matches: window.matchMedia("(min-width: 900px)").matches
         }
     }
     mapboxElRef = createRef();
@@ -26,7 +26,7 @@ class MapComponent extends Component {
             container: this.mapboxElRef.current,
             style: mapStyle,
             center: [16, 27],
-            zoom: 2,
+            zoom: 2.5,
         });
         this.renderMap(map);
     }
@@ -35,7 +35,7 @@ class MapComponent extends Component {
         var nav = new mapboxgl.NavigationControl();
         map.addControl(nav, this.state.matches?'bottom-right':'top-right');
 
-        fetch('https://covid19-api.hackbotone.com/markers.geojson')
+        fetch('https://covid19-full-stack/markers.geojson')
             .then(response => response.json())
             .then(data =>
                 map.once('load', function () {
